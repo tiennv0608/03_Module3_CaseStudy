@@ -12,6 +12,14 @@
     <title>List Movie</title>
 </head>
 <body>
+<center>
+<h1><a href="/movies">List Movie</a></h1>
+    <form method="get">
+        <input type="hidden" name="action" value="search">
+        <input type="text" name="key">
+        <input type="submit" value="search">
+    </form>
+
 <table border="1">
 
     <tr>
@@ -29,5 +37,6 @@
             </tr>
         </c:forEach>
 </table>
+</center>
 </body>
 </html>

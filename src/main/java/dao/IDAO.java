@@ -13,4 +13,6 @@ public interface IDAO<T> {
     void delete(int id);
 
     T findById(int id);
+
+    List<T> findByName(String name) throws SQLException, ClassNotFoundException;
 }
