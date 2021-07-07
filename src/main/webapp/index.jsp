@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
- <h1>dậkjafklhaslfh</h1>
+ <h1><a href="/admin/listmovie.jsp">Homepage</a></h1>
 </body>
 </html>
