@@ -8,7 +8,7 @@ import java.util.List;
 public interface IDAO<T> {
     List<T> findAll() throws SQLException, ClassNotFoundException;
 
-    void create(Movie movie) throws SQLException;
+    void create(T t) throws SQLException;
 
     void update(T t);
 

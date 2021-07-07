@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieDAO implements IDAO{
+public class MovieDAO implements IDAO<Movie> {
     SQLConnection sqlConnection = new SQLConnection();
     private final String FIND_ALL = "SELECT * FROM movie;";
     private final String FIND_BY_NAME = "SELECT * FROM movie WHERE nameMovie LIKE ?";
@@ -23,9 +23,9 @@ public class MovieDAO implements IDAO{
         List<Movie> movies = new ArrayList<>();
         Connection connection = sqlConnection.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL);
-        ResultSet resultSet= preparedStatement.executeQuery();
-        while (resultSet.next()){
-            int id =resultSet.getInt("id");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
             String nameMovie = resultSet.getString("nameMovie");
             int time = resultSet.getInt("time");
             String director = resultSet.getString("director");
@@ -40,17 +40,12 @@ public class MovieDAO implements IDAO{
 
     @Override
     public void create(Movie movie) throws SQLException {
-        Connection connection = null;
-        try {
-            connection = sqlConnection.getConnection();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        Connection connection = sqlConnection.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(ADD_FILM);
         preparedStatement.setInt(1, movie.getId());
-        preparedStatement.setString(2,movie.getNameMovie());
-        preparedStatement.setInt(3,movie.getTime());
-        preparedStatement.setString(4,movie.getDirector());
+        preparedStatement.setString(2, movie.getNameMovie());
+        preparedStatement.setInt(3, movie.getTime());
+        preparedStatement.setString(4, movie.getDirector());
         preparedStatement.setString(5, movie.getImage());
         preparedStatement.setString(6, movie.getCategory());
         preparedStatement.setString(7, movie.getDescription());
@@ -58,7 +53,7 @@ public class MovieDAO implements IDAO{
     }
 
     @Override
-    public void update(Object o) {
+    public void update(Movie movie) {
 
     }
 
@@ -71,8 +66,7 @@ public class MovieDAO implements IDAO{
     }
 
     @Override
-    public Object findById(int id) {
-
+    public Movie findById(int id) {
         return null;
     }
 
@@ -81,9 +75,9 @@ public class MovieDAO implements IDAO{
         List<Movie> movies = new ArrayList<>();
         Connection connection = sqlConnection.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME);
-        preparedStatement.setString(1, "%"+name+"%");
+        preparedStatement.setString(1, "%" + name + "%");
         ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()){
+        while (resultSet.next()) {
             int id = resultSet.getInt("id");
             String nameMovie = resultSet.getString("nameMovie");
             int time = resultSet.getInt("time");
@@ -97,4 +91,22 @@ public class MovieDAO implements IDAO{
         return movies;
     }
 
+    public List<Movie> findByCategory(String category) throws SQLException {
+        List<Movie> movieList = new ArrayList<>();
+        Connection connection = sqlConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_CATEGORY);
+        preparedStatement.setString(1, category);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String nameMovie = resultSet.getString("nameMovie");
+            int time = resultSet.getInt("time");
+            String director = resultSet.getString("director");
+            String image = resultSet.getString("image");
+            String category1 = resultSet.getString("category");
+            String description = resultSet.getString("description");
+            movieList.add(new Movie(id, nameMovie, time, director, image, category1, description));
+        }
+        return movieList;
+    }
 }

@@ -35,6 +35,13 @@ public class MovieServlet extends HttpServlet {
                     e.printStackTrace();
                 }
                 break;
+            case "search":
+                try {
+                    searchCategoryFilm(request, response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
             default:
                 try {
                     findAll(request, response);
@@ -46,6 +53,13 @@ public class MovieServlet extends HttpServlet {
                 break;
         }
     }
+private void searchCategoryFilm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+    String category = request.getParameter("name");
+    List<Movie> movies = movieDAO.findByCategory(category);
+    request.setAttribute("movies", movies);
+    RequestDispatcher dispatcher = request.getRequestDispatcher("movie/listmovie.jsp");
+    dispatcher.forward(request, response);
+}
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
