@@ -12,6 +12,17 @@
     <title>List Movie</title>
 </head>
 <body>
+<form method="get">
+    <select name="name">
+        <option value="Kinh di">Kinh di</option>
+        <option value="Hanh dong">Hanh dong</option>
+        <option value="Lang man">Lang man</option>
+        <option value="Tre em">Tre em</option>
+        <option value="Hai kich">Hai kich</option>
+    </select>
+    <input type="hidden" name="action" value="search">
+    <input type="submit" value="search movie">
+</form>
 <h1 align="center">danh sach phim</h1>
 <h2 align="center"><a href=${pageContext.request.contextPath}/movies?action=create>add new movie</a></h2>
 <table border="1" align="center">
