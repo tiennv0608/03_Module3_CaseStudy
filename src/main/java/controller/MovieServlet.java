@@ -15,6 +15,21 @@ public class MovieServlet extends HttpServlet {
     MovieDAO movieDAO = new MovieDAO();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action == null){
+            action="";
+        }
+        switch (action){
+            case "create":
+                showCreateMovie(request,response);
+                break;
+            default:
+                display(request, response);
+                break;
+        }
+
+    }
+    private void display(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("movie/listmovie.jsp");
         try {
             List<Movie> movies = movieDAO.findAll();
@@ -26,11 +41,39 @@ public class MovieServlet extends HttpServlet {
         }
         requestDispatcher.forward(request, response);
     }
+    private void showCreateMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("movie/create.jsp");
+        dispatcher.forward(request,response);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String action = request.getParameter("action");
+        if (action == null){
+            action="";
+        }
+        switch (action){
+            case "create":
+                try {
+                    addMovie(request,response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
     }
-
-
+    private void addMovie(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        int id =Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("nameMovie");
+        int age =Integer.parseInt(request.getParameter("time"));
+        String director = request.getParameter("director");
+        String image = request.getParameter("image");
+        String category = request.getParameter("category");
+        String description = request.getParameter("description");
+        Movie movie = new Movie(id, name, age, director, image, category, description);
+        movieDAO.create(movie);
+        display(request, response);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("customer/create.jsp");
+        dispatcher.forward(request, response);
+    }
 }
