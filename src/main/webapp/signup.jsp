@@ -59,16 +59,16 @@
                     In</a></div>
             </div>
             <div class="panel-body">
-                <form method="get" id="signupform" class="form-horizontal" role="form" action="/signup">
+                <form method="post" id="signupform" class="form-horizontal" role="form" action="/signup.jsp">
                     <input type="hidden" name="action" value="signup">
-
-                    <div id="signupalert" class="alert alert-danger">
+                    <p class="text-danger">${mess}</p>
+                    <div id="signupalert"  class="alert alert-danger">
                         <p>Error:</p>
                         <span></span>
                     </div>
 
-                    <p class="text-danger">${mess1}</p>
-                    <p class="text-danger">${mess2}</p>
+<%--                    <p class="text-danger">${mess1}</p>--%>
+                    <%--                    <p class="text-danger">${mess2}</p>--%>
                     <div class="form-group">
                         <label class="col-md-3 control-label">User</label>
                         <div class="col-md-9">

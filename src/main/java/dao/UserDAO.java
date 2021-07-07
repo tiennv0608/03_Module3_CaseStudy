@@ -23,7 +23,6 @@ public class UserDAO implements IDAO<User> {
     @Override
     public void create(User user) {
 
-
     }
 
     @Override
