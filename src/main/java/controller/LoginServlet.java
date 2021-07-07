@@ -12,6 +12,7 @@ import java.sql.SQLException;
 @WebServlet(name = "LoginServlet", urlPatterns = "/home")
 public class LoginServlet extends HttpServlet {
     private UserDAO userDAO = new UserDAO();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher;
@@ -21,8 +22,12 @@ public class LoginServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "login":
-                login(request, response);
+            case "view":
+                try {
+                    showFormView(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 break;
             case "signup":
                 signup(request, response);
@@ -46,7 +51,6 @@ public class LoginServlet extends HttpServlet {
                 signup(request, response);
                 break;
         }
-
     }
 
     protected void login(HttpServletRequest request, HttpServletResponse response) throws
@@ -85,12 +89,18 @@ public class LoginServlet extends HttpServlet {
             } else {
                 User user = new User(username, password, gender, fullname, Integer.parseInt(year), email, phone, address);
                 userDAO.create(user);
-                request.setAttribute("message","Dang ky thanh cong");
+                request.setAttribute("message", "Dang ky thanh cong");
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             }
         }
-
     }
 
+    private void showFormView(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        String key = request.getParameter("key");
+        User user = userDAO.findByUsername(key);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/view.jsp");
+        request.setAttribute("user", user);
+        requestDispatcher.forward(request, response);
+    }
 
 }

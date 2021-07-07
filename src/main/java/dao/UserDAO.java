@@ -11,7 +11,7 @@ import java.util.List;
 public class UserDAO implements IDAO<User> {
     private static final String LOG_IN = "select * from  user where username = ? and password = ?";
     private static final String SIGNUP = "insert into user values(?,?,?,?,?,?,?,?);";
-    private static final String CHECK_EXIST_USER = "select username from user where username = ?";
+    private static final String CHECK_EXIST_USER = "select * from user where username = ?";
 
     SQLConnection sqlConnection = new SQLConnection();
 
@@ -106,8 +106,22 @@ public class UserDAO implements IDAO<User> {
         return null;
     }
 
-    public User signup() {
-
+    public User findByUsername(String username) throws SQLException {
+        try (Connection connection = sqlConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(CHECK_EXIST_USER)) {
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String password = resultSet.getString("password");
+                String fullname = resultSet.getString("fullname");
+                String gender = resultSet.getString("gender");
+                int year = Integer.parseInt(resultSet.getString("yearofbirth"));
+                String email = resultSet.getString("email");
+                String phone = resultSet.getString("phone");
+                String address = resultSet.getString("address");
+                return new User(username, password, gender, fullname, year, email, phone, address);
+            }
+        }
         return null;
     }
 }
