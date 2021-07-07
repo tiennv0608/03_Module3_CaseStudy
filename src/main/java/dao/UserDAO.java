@@ -22,7 +22,20 @@ public class UserDAO implements IDAO<User> {
 
     @Override
     public void create(User user) {
-
+        try (Connection connection = sqlConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SIGNUP);) {
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getGender());
+            preparedStatement.setString(4, user.getFullName());
+            preparedStatement.setInt(5, user.getDob());
+            preparedStatement.setString(6, user.getEmail());
+            preparedStatement.setString(7, user.getPhone());
+            preparedStatement.setString(8, user.getAddress());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

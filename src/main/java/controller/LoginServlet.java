@@ -9,7 +9,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "LoginServlet", urlPatterns = "/login")
+@WebServlet(name = "LoginServlet", urlPatterns = "/home")
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
                 signup(request, response);
                 break;
             default:
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                request.getRequestDispatcher("listmovie.jsp").forward(request, response);
         }
     }
 
@@ -57,12 +57,9 @@ public class LoginServlet extends HttpServlet {
         if (user == null) {
             request.setAttribute("message", "Wrong user or password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
-
         } else {
             response.sendRedirect("home");
         }
-
-
     }
 
     protected void signup(HttpServletRequest request, HttpServletResponse response) throws

@@ -89,7 +89,7 @@
 
                 <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-                <form method="get" id="loginform" class="form-horizontal" role="form" action="/login">
+                <form method="get" id="loginform" class="form-horizontal" role="form" action="login">
                     <input type="hidden" name="action" value="login">
                        <p class="text-danger">${message}</p>
                     <div style="margin-bottom: 25px" class="input-group">
@@ -127,7 +127,7 @@
                         <div class="col-md-12 control">
                             <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
                                 Don't have an account!
-                                <a href="/signup.jsp    " onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                                <a href="/signup.jsp" onClick="$('#loginbox').hide(); $('#signupbox').show()">
                                     Sign Up Here
                                 </a>
                             </div>
