@@ -9,181 +9,204 @@
 <html>
 <head>
     <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">--%>
+<%--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>--%>
+<%--    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>--%>
+<%--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>--%>
 
-    <style>
-        :root {
-            --input-padding-x: 1.5rem;
-            --input-padding-y: .75rem;
-        }
 
-        body {
-            background: #007bff;
-            background: linear-gradient(to right, #0062E6, #33AEFF);
-        }
-
-        .card-signin {
-            border: 0;
-            border-radius: 1rem;
-            box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
-        }
-
-        .card-signin .card-title {
-            margin-bottom: 2rem;
-            font-weight: 300;
-            font-size: 1.5rem;
-        }
-
-        .card-signin .card-body {
-            padding: 2rem;
-        }
-
-        .form-signin {
-            width: 100%;
-        }
-
-        .form-signin .btn {
-            font-size: 80%;
-            border-radius: 5rem;
-            letter-spacing: .1rem;
-            font-weight: bold;
-            padding: 1rem;
-            transition: all 0.2s;
-        }
-
-        .form-label-group {
-            position: relative;
-            margin-bottom: 1rem;
-        }
-
-        .form-label-group input {
-            height: auto;
-            border-radius: 2rem;
-        }
-
-        .form-label-group>input,
-        .form-label-group>label {
-            padding: var(--input-padding-y) var(--input-padding-x);
-        }
-
-        .form-label-group>label {
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: block;
-            width: 100%;
-            margin-bottom: 0;
-            /* Override default `<label>` margin */
-            line-height: 1.5;
-            color: #495057;
-            border: 1px solid transparent;
-            border-radius: .25rem;
-            transition: all .1s ease-in-out;
-        }
-
-        .form-label-group input::-webkit-input-placeholder {
-            color: transparent;
-        }
-
-        .form-label-group input:-ms-input-placeholder {
-            color: transparent;
-        }
-
-        .form-label-group input::-ms-input-placeholder {
-            color: transparent;
-        }
-
-        .form-label-group input::-moz-placeholder {
-            color: transparent;
-        }
-
-        .form-label-group input::placeholder {
-            color: transparent;
-        }
-
-        .form-label-group input:not(:placeholder-shown) {
-            padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
-            padding-bottom: calc(var(--input-padding-y) / 3);
-        }
-
-        .form-label-group input:not(:placeholder-shown)~label {
-            padding-top: calc(var(--input-padding-y) / 3);
-            padding-bottom: calc(var(--input-padding-y) / 3);
-            font-size: 12px;
-            color: #777;
-        }
-
-        .btn-google {
-            color: white;
-            background-color: #ea4335;
-        }
-
-        .btn-facebook {
-            color: white;
-            background-color: #3b5998;
-        }
-
-        /* Fallback for Edge
-        -------------------------------------------------- */
-
-        @supports (-ms-ime-align: auto) {
-            .form-label-group>label {
-                display: none;
-            }
-            .form-label-group input::-ms-input-placeholder {
-                color: #777;
-            }
-        }
-
-        /* Fallback for IE
-        -------------------------------------------------- */
-
-        @media all and (-ms-high-contrast: none),
-        (-ms-high-contrast: active) {
-            .form-label-group>label {
-                display: none;
-            }
-            .form-label-group input:-ms-input-placeholder {
-                color: #777;
-            }
-        }
-    </style>
 </head>
+<style>
+    legend{
+        color:#141823;
+        font-size:25px;
+        font-weight:bold;
+    }
+    .signup-btn {
+        background: #79bc64;
+        background-image: -webkit-linear-gradient(top, #79bc64, #578843);
+        background-image: -moz-linear-gradient(top, #79bc64, #578843);
+        background-image: -ms-linear-gradient(top, #79bc64, #578843);
+        background-image: -o-linear-gradient(top, #79bc64, #578843);
+        background-image: linear-gradient(to bottom, #79bc64, #578843);
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        text-shadow: 0px 1px 0px #898a88;
+        -webkit-box-shadow: 0px 0px 0px #a4e388;
+        -moz-box-shadow: 0px 0px 0px #a4e388;
+        box-shadow: 0px 0px 0px #a4e388;
+        font-family: Arial;
+        color: #ffffff;
+        font-size: 20px;
+        padding: 10px 20px 10px 20px;
+        border: solid #3b6e22  1px;
+        text-decoration: none;
+    }
 
-<body>
+    .signup-btn:hover {
+        background: #79bc64;
+        background-image: -webkit-linear-gradient(top, #79bc64, #5e7056);
+        background-image: -moz-linear-gradient(top, #79bc64, #5e7056);
+        background-image: -ms-linear-gradient(top, #79bc64, #5e7056);
+        background-image: -o-linear-gradient(top, #79bc64, #5e7056);
+        background-image: linear-gradient(to bottom, #79bc64, #5e7056);
+        text-decoration: none;
+    }
+    .navbar-default .navbar-brand{
+        color:#fff;
+        font-size:30px;
+        font-weight:bold;
+    }
+    .form .form-control { margin-bottom: 10px; }
+    @media (min-width:768px) {
+        #home{
+            margin-top:50px;
+        }
+        #home .slogan{
+            color: #0e385f;
+            line-height: 29px;
+            font-weight:bold;
+        }
+    }
+</style>
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
 <div class="container">
-    <div class="row">
-        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-            <div class="card card-signin my-5">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Sign In</h5>
-                    <form class="form-signin">
-                        <div class="form-label-group">
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                            <label for="inputEmail">Email address</label>
-                        </div>
+    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info" >
+            <div class="panel-heading">
+                <div class="panel-title">Sign In</div>
+                <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
+            </div>
 
-                        <div class="form-label-group">
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                            <label for="inputPassword">Password</label>
-                        </div>
+            <div style="padding-top:30px" class="panel-body" >
 
-                        <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1">
-                            <label class="custom-control-label" for="customCheck1">Remember password</label>
+                <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+                <form id="loginform" class="form-horizontal" role="form">
+
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                    </div>
+
+
+
+                    <div class="input-group">
+                        <div class="checkbox">
+                            <label>
+                                <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
+                            </label>
                         </div>
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
-                        <hr class="my-4">
-                        <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
-                        <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
-                    </form>
-                </div>
+                    </div>
+
+
+                    <div style="margin-top:10px" class="form-group">
+                        <!-- Button -->
+
+                        <div class="col-sm-12 controls">
+                            <a id="btn-login" href="#" class="btn btn-success">Login </a>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-12 control">
+                            <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                                Don't have an account!
+                                <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                                    Sign Up Here
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+
             </div>
         </div>
     </div>
+    <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">Sign Up</div>
+                <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
+            </div>
+            <div class="panel-body" >
+                <form id="signupform" class="form-horizontal" role="form">
+
+                    <div id="signupalert" style="display:none" class="alert alert-danger">
+                        <p>Error:</p>
+                        <span></span>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="email" class="col-md-3 control-label">Email</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="email" placeholder="Email Address">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-md-3 control-label">First Name</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="firstname" placeholder="First Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="col-md-3 control-label">Last Name</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="lastname" placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-md-3 control-label">Password</label>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control" name="passwd" placeholder="Password">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="year" class="col-md-3 control-label">Year of birth</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="year" placeholder="Year of birth">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- Button -->
+                        <div class="col-md-offset-3 col-md-9">
+                            <button id="btn-signup" value="&nbsp Sign Up" type="submit" class="btn btn-info"></button>
+                            <span style="margin-left:8px;"></span>
+                        </div>
+                    </div>
+
+
+
+
+
+                </form>
+            </div>
+        </div>
+
+
+
+
+    </div>
 </div>
+
 </body>
 </html>
