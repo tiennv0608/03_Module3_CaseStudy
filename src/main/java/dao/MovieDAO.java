@@ -14,6 +14,9 @@ public class MovieDAO implements IDAO{
     SQLConnection sqlConnection = new SQLConnection();
     private final String FIND_ALL = "SELECT * FROM movie;";
     private final String FIND_BY_NAME = "SELECT * FROM movie WHERE nameMovie LIKE ?";
+    private final String ADD_FILM = "insert into movie(id,nameMovie,time,director,image,category, description) value(?,?,?,?,?,?,?);";
+    private final String SEARCH_CATEGORY = "select * from movie where category like ?";
+    private final String DELETE_BY_ID = "DELETE FROM movie WHERE id = ?";
 
     @Override
     public List<Movie> findAll() throws SQLException, ClassNotFoundException {
@@ -34,9 +37,24 @@ public class MovieDAO implements IDAO{
         return movies;
     }
 
-    @Override
-    public void create(Object o) {
 
+    @Override
+    public void create(Movie movie) throws SQLException {
+        Connection connection = null;
+        try {
+            connection = sqlConnection.getConnection();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        PreparedStatement preparedStatement = connection.prepareStatement(ADD_FILM);
+        preparedStatement.setInt(1, movie.getId());
+        preparedStatement.setString(2,movie.getNameMovie());
+        preparedStatement.setInt(3,movie.getTime());
+        preparedStatement.setString(4,movie.getDirector());
+        preparedStatement.setString(5, movie.getImage());
+        preparedStatement.setString(6, movie.getCategory());
+        preparedStatement.setString(7, movie.getDescription());
+        preparedStatement.executeUpdate();
     }
 
     @Override
@@ -45,12 +63,16 @@ public class MovieDAO implements IDAO{
     }
 
     @Override
-    public void delete(int id) {
-
+    public void delete(int id) throws SQLException, ClassNotFoundException {
+        Connection connection = sqlConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
+        preparedStatement.setInt(1, id);
+        preparedStatement.executeUpdate();
     }
 
     @Override
     public Object findById(int id) {
+
         return null;
     }
 
@@ -74,4 +96,5 @@ public class MovieDAO implements IDAO{
         }
         return movies;
     }
+
 }
