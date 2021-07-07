@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
- <h1><a href="/user/listmovie.jsp">Homepage</a></h1>
+ <h1><a href="/listmovie.jsp">Homepage</a></h1>
 </body>
 </html>

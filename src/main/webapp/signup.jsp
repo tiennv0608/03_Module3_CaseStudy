@@ -81,11 +81,25 @@
                             <input type="password" class="form-control" name="repassword" placeholder="Repeat password">
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Email</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="email" placeholder="Email">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Full Name</label>
                         <div class="col-md-9">
                             <input type="text" class="form-control" name="fullname" placeholder="Full Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Gender</label>
+                        <div class="col-md-9">
+                            <select name="gender" class="form-control">
+                                <option value="Nam">Nam</option>
+                                <option value="Nu">Nu</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">

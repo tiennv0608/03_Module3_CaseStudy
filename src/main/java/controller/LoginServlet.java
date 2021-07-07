@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/home")
 public class LoginServlet extends HttpServlet {
+    private UserDAO userDAO = new UserDAO();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher;
@@ -58,7 +59,8 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("message", "Wrong user or password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            response.sendRedirect("home");
+            request.setAttribute("user", user);
+            request.getRequestDispatcher("user/listmovie.jsp").forward(request, response);
         }
     }
 
@@ -77,12 +79,13 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("mess", "Xac nhan mat khau khong trung khop");
             request.getRequestDispatcher("/signup.jsp").forward(request, response);
         } else {
-            if (!(new UserDAO().checkUserExist(username))) {
+            if ((userDAO.checkUserExist(username))) {
                 request.setAttribute("mess", "Ten dang nhap da ton tai!");
                 request.getRequestDispatcher("/signup.jsp").forward(request, response);
             } else {
                 User user = new User(username, password, gender, fullname, Integer.parseInt(year), email, phone, address);
-                new UserDAO().create(user);
+                userDAO.create(user);
+                request.setAttribute("message","Dang ky thanh cong");
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             }
         }

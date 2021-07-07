@@ -89,7 +89,7 @@
 
                 <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-                <form method="get" id="loginform" class="form-horizontal" role="form" action="login">
+                <form method="post" id="loginform" class="form-horizontal" role="form" action="/home">
                     <input type="hidden" name="action" value="login">
                        <p class="text-danger">${message}</p>
                     <div style="margin-bottom: 25px" class="input-group">
@@ -118,7 +118,7 @@
                         <!-- Button -->
 
                         <div class="col-sm-12 controls">
-                            <button class="btn btn-info" >login</button>
+                            <button class="btn btn-info" >Login</button>
                         </div>
                     </div>
 
