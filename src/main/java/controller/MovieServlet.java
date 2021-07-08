@@ -81,9 +81,9 @@ private void searchCategoryFilm(HttpServletRequest request, HttpServletResponse 
 
     }
     public void findAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("Admin/listMovie.jsp");
         List<Movie> movies = movieDAO.findAll();
         request.setAttribute("movies", movies);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("movie/listmovie.jsp");
         requestDispatcher.forward(request, response);
     }
 
