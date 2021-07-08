@@ -16,7 +16,7 @@
     <h1><a href="/movies">List Movie</a></h1>
     <h2 align="center"><a href=${pageContext.request.contextPath}/movies?action=create>add new movie</a></h2>
     <form method="get">
-        <input type="hidden" name="action" value="search">
+        <input type="hidden" name="action" value="searchname">
         <input type="text" name="key">
         <input type="submit" value="search">
     </form>

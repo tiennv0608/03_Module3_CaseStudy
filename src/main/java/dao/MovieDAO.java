@@ -14,7 +14,7 @@ public class MovieDAO implements IDAO<Movie> {
     SQLConnection sqlConnection = new SQLConnection();
     private final String FIND_ALL = "SELECT * FROM movie;";
     private final String FIND_BY_NAME = "SELECT * FROM movie WHERE nameMovie LIKE ?";
-    private final String ADD_FILM = "insert into movie(id,nameMovie,time,director,image,category, description) value(?,?,?,?,?,?,?);";
+    private final String ADD_FILM = "insert into movie(id,nameMovie,time,director,image,category, description) values (?,?,?,?,?,?,?);";
     private final String SEARCH_CATEGORY = "select * from movie where category like ?";
     private final String DELETE_BY_ID = "DELETE FROM movie WHERE id = ?";
 
