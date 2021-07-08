@@ -64,13 +64,14 @@ public class LoginServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
         if(!(password.equals(repassword))){
-            request.setAttribute("mess1","Xac nhan mat khau khong trung khop");
-            request.getRequestDispatcher("signup.jsp").forward(request,response);
+
+            request.getRequestDispatcher("/signup.jsp").forward(request,response);
+            request.setAttribute("mess1","Xac nhan mat khau khong dung!");
         }
         else {
             if (!(new UserDAO().checkUserExist(username))){
                 request.setAttribute("mess2","Ten dang nhap da ton tai!");
-                request.getRequestDispatcher("signup.jsp").forward(request,response);
+                request.getRequestDispatcher("/signup.jsp").forward(request,response);
             } else {
                 User user = new User(username, password, gender, fullname, Integer.parseInt(year), email, phone, address);
                 new UserDAO().create(user);
