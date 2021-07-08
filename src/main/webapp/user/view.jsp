@@ -57,11 +57,7 @@
                     <button>Edit</button>`
                 </td>
                 <td>
-                    <form method="post" action="/home">
-                        <input type="hidden" name="username" value="${user.username}">
-                        <input type="hidden" name="action" value="delete">
-                        <button>Delete</button>
-                    </form>
+                    <a href="/home?action=delete&key=${user.username}">delete</a>
                 </td>
             </tr>
         </table>

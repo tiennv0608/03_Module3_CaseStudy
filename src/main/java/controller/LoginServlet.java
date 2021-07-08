@@ -29,8 +29,8 @@ public class LoginServlet extends HttpServlet {
                     throwables.printStackTrace();
                 }
                 break;
-            case "signup":
-                signup(request, response);
+            case "delete":
+                showFormDelete(request, response);
                 break;
             default:
                 request.getRequestDispatcher("listmovie.jsp").forward(request, response);
@@ -53,6 +53,13 @@ public class LoginServlet extends HttpServlet {
             case "edit":
                 try {
                     updateUser(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
+            case "delete":
+                try {
+                    deleteUser(request, response);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -118,6 +125,17 @@ public class LoginServlet extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
+    private void showFormDelete(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/delete.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         String username = request.getParameter("username");
         User user = userDAO.findByUsername(username);
@@ -129,5 +147,12 @@ public class LoginServlet extends HttpServlet {
         user.setAddress(request.getParameter("address"));
         userDAO.update(user);
         showHomePageUser(request, response);
+    }
+
+    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        String key = request.getParameter("key");
+        userDAO.deleteByUsername(key);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("listmovie.jsp");
+        dispatcher.forward(request, response);
     }
 }

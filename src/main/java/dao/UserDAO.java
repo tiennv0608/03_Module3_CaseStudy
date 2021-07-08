@@ -13,6 +13,7 @@ public class UserDAO implements IDAO<User> {
     private static final String SIGNUP = "insert into user values(?,?,?,?,?,?,?,?);";
     private static final String CHECK_EXIST_USER = "select * from user where username = ?";
     private static final String UPDATE = "update user set fullname = ?, gender = ?, yearofbirth = ?, email = ?, phone = ?, address = ? where username = ?;";
+    private static final String DELETE = "delete from user where username = ?";
 
     SQLConnection sqlConnection = new SQLConnection();
 
@@ -124,5 +125,12 @@ public class UserDAO implements IDAO<User> {
             }
         }
         return null;
+    }
+
+    public void deleteByUsername(String username) throws SQLException {
+        Connection connection = sqlConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
+        preparedStatement.setString(1, username);
+        preparedStatement.executeUpdate();
     }
 }
