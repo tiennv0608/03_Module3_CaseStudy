@@ -20,7 +20,7 @@ public class MovieServlet extends HttpServlet {
             action = "";
         }
         switch (action){
-            case "search":
+            case "searchname":
                 findByName(request, response);
                 break;
             case "create":
@@ -35,7 +35,7 @@ public class MovieServlet extends HttpServlet {
                     e.printStackTrace();
                 }
                 break;
-            case "search":
+            case "searchfilm":
                 try {
                     searchCategoryFilm(request, response);
                 } catch (SQLException e) {
@@ -75,10 +75,7 @@ private void searchCategoryFilm(HttpServletRequest request, HttpServletResponse 
                     e.printStackTrace();
                 }
                 break;
-
-
         }
-
     }
     public void findAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("Admin/listMovie.jsp");
