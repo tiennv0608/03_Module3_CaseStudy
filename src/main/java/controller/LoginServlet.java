@@ -63,8 +63,12 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("message", "Wrong user or password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            request.setAttribute("user", user);
-            request.getRequestDispatcher("user/listmovie.jsp").forward(request, response);
+            if(user.getUsername().equals("admin")){
+                response.sendRedirect("/movies");
+            } else {
+                request.setAttribute("user", user);
+                request.getRequestDispatcher("user/listmovie.jsp").forward(request, response);
+            }
         }
     }
 
@@ -79,6 +83,7 @@ public class LoginServlet extends HttpServlet {
         String gender = request.getParameter("gender");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
+
         if (!(password.equals(repassword))) {
             request.setAttribute("mess", "Xac nhan mat khau khong trung khop");
             request.getRequestDispatcher("/signup.jsp").forward(request, response);

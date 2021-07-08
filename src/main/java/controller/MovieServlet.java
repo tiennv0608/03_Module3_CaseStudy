@@ -35,7 +35,7 @@ public class MovieServlet extends HttpServlet {
                     e.printStackTrace();
                 }
                 break;
-            case "search":
+            case "search1":
                 try {
                     searchCategoryFilm(request, response);
                 } catch (SQLException e) {
