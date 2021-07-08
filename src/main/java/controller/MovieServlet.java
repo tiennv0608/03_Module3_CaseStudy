@@ -106,19 +106,21 @@ private void searchCategoryFilm(HttpServletRequest request, HttpServletResponse 
         dispatcher.forward(request,response);
     }
     private void addMovie(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException, ClassNotFoundException {
-        int id =Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("nameMovie");
-        int age =Integer.parseInt(request.getParameter("time"));
-        String director = request.getParameter("director");
-        String image = request.getParameter("image");
-        String category = request.getParameter("category");
-        String description = request.getParameter("description");
-        Movie movie = new Movie(id, name, age, director, image, category, description);
+        int id =Integer.parseInt(request.getParameter("movie_id"));
+        String name = request.getParameter("movie_name");
+        int time =Integer.parseInt(request.getParameter("movie_time"));
+        String director = request.getParameter("movie_director");
+        String image = request.getParameter("srcimg");
+        String category = request.getParameter("movie_category");
+        String description = request.getParameter("product_description");
+        Movie movie = new Movie(id, name, time, director, image, category, description);
         movieDAO.create(movie);
         RequestDispatcher dispatcher = request.getRequestDispatcher("Admin/create.jsp");
         dispatcher.forward(request, response);
         findAll(request, response);
     }
+
+
     private void deleteMovie(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         movieDAO.delete(id);
