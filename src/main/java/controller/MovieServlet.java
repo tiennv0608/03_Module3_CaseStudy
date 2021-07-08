@@ -20,9 +20,9 @@ public class MovieServlet extends HttpServlet {
             action = "";
         }
         switch (action){
-            case "search":
-                findByName(request, response);
-                break;
+//            case "search":
+//                findByName(request, response);
+//                break;
             case "create":
                 showCreateMovie(request, response);
                 break;

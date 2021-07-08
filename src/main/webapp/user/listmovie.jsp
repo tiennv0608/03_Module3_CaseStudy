@@ -121,6 +121,7 @@
                     <img src="https://koicine.com/wp-content/uploads/2021/01/125528764_2916400158594025_2129206050230143939_o-819x1024.jpg"
                          class="d-block w-80" alt="Tom and Jerry" style="height: 300px">
                     <p style="text-align:center">Tom and Jerry</p>
+                    <button type="button" class="btn btn-info"><a href=/movies?action=bookTicket>đặt vé</a></button>
                 </a>
             </center>
         </div>
