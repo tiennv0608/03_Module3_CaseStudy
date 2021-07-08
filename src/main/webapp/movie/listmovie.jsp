@@ -17,9 +17,17 @@
 
 </head>
 <body>
+
+
+<form method="get" class="form-inline my-2 my-lg-0">
+    <input type="hidden" name="action" value="hihisearch">
+    <input name="searchbyname" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
 <table class="table table-striped">
     <thead>
     <tr>
+        <th scope="col"></th>
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Time</th>
@@ -27,12 +35,14 @@
         <th scope="col">Category</th>
         <th scope="col">Description</th>
         <th scope="col">Image</th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
     <c:forEach var="movie" items="${movies}">
 
     <tr>
+        <td scope="col"></td>
         <th scope="row"><c:out value = "${movie.id}"/></th>
         <td><c:out value = "${movie.nameMovie}"/></td>
         <td><c:out value = "${movie.time}"/></td>
@@ -40,6 +50,7 @@
         <td><c:out value = "${movie.category}"/></td>
         <td><c:out value = "${movie.description}"/></td>
         <td><a href="<c:out value = "${movie.image}"/>"></a></td>
+        <td scope="col"></td>
     </tr>
 
     </c:forEach>

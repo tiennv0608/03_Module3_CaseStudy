@@ -42,6 +42,7 @@ public class MovieServlet extends HttpServlet {
                     e.printStackTrace();
                 }
                 break;
+
             default:
                 try {
                     findAll(request, response);
@@ -83,7 +84,7 @@ private void searchCategoryFilm(HttpServletRequest request, HttpServletResponse 
     public void findAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         List<Movie> movies = movieDAO.findAll();
         request.setAttribute("movies", movies);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("movie/listmovie.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("Admin/listMovie.jsp");
         requestDispatcher.forward(request, response);
     }
 
@@ -122,6 +123,19 @@ private void searchCategoryFilm(HttpServletRequest request, HttpServletResponse 
         int id = Integer.parseInt(request.getParameter("id"));
         movieDAO.delete(id);
         findAll(request, response);
+    }
+
+    private void findByNameMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String valueSearch = request.getParameter("searchbyname");
+        List<Movie> movies=null;
+        try {
+           movies = movieDAO.findByNameMovie(valueSearch);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        request.setAttribute("movies",movies);
+        request.getRequestDispatcher("movie/listmovie").forward(request,response);
+
     }
 
 }

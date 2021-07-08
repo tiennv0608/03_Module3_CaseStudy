@@ -109,4 +109,23 @@ public class MovieDAO implements IDAO<Movie> {
         }
         return movieList;
     }
+
+    public List<Movie> findByNameMovie(String name) throws SQLException{
+        List<Movie> movies = new ArrayList<>();
+        Connection connection = sqlConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME);
+        preparedStatement.setString(1,"%"+name+"%");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String nameMovie = resultSet.getString("nameMovie");
+            int time = resultSet.getInt("time");
+            String director = resultSet.getString("director");
+            String image = resultSet.getString("image");
+            String category1 = resultSet.getString("category");
+            String description = resultSet.getString("description");
+            movies.add(new Movie(id, nameMovie, time, director, image, category1, description));
+        }
+        return movies;
+    }
 }
