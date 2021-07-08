@@ -13,43 +13,38 @@ import java.util.List;
 @WebServlet(name = "MovieServlet", urlPatterns = "/movies")
 public class MovieServlet extends HttpServlet {
     MovieDAO movieDAO = new MovieDAO();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action == null){
+        if (action == null) {
             action = "";
         }
-        switch (action) {
-            case "searchname":
-                findByName(request, response);
-                break;
-            case "create":
-                showCreateMovie(request, response);
-                break;
-            case "delete":
-                try {
+        try {
+            switch (action) {
+                case "searchname":
+                    findByName(request, response);
+                    break;
+                case "create":
+                    showCreateMovie(request, response);
+                    break;
+                case "edit":
+                    showFormEdit(request, response);
+                    break;
+                case "delete":
                     deleteMovie(request, response);
-                } catch (SQLException | ClassNotFoundException throwables) {
-                    throwables.printStackTrace();
-                }
-                break;
-            case "searchfilm":
-                try {
+                    break;
+                case "searchfilm":
                     searchCategoryFilm(request, response);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                break;
-            default:
-                try {
+                    break;
+                default:
                     findAll(request, response);
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                break;
+                    break;
+            }
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
         }
+
     }
 
     private void searchCategoryFilm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
@@ -63,22 +58,23 @@ public class MovieServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action == null){
-            action="";
+        if (action == null) {
+            action = "";
         }
-        switch (action){
-            case "create":
-                try {
-                    addMovie(request,response);
-                } catch (SQLException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                break;
-
-
+        try {
+            switch (action) {
+                case "create":
+                    addMovie(request, response);
+                    break;
+                case "edit":
+                    updateMovie(request, response);
+                    break;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
-
     }
+
     public void findAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("Admin/listMovie.jsp");
         List<Movie> movies = movieDAO.findAll();
@@ -99,41 +95,49 @@ public class MovieServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("Admin/listMovie.jsp");
         requestDispatcher.forward(request, response);
     }
+
     private void showCreateMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("Admin/create.jsp");
-        dispatcher.forward(request,response);
+        dispatcher.forward(request, response);
     }
+
+    private void showFormEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String key = request.getParameter("id");
+        Movie movie = movieDAO.findById(Integer.parseInt(key));
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("Admin/edit.jsp");
+        request.setAttribute("movie", movie);
+        requestDispatcher.forward(request, response);
+    }
+
     private void addMovie(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException, ClassNotFoundException {
-        int id =Integer.parseInt(request.getParameter("movie_id"));
+        int id = Integer.parseInt(request.getParameter("movie_id"));
         String name = request.getParameter("movie_name");
-        int age =Integer.parseInt(request.getParameter("movie_time"));
+        int age = Integer.parseInt(request.getParameter("movie_time"));
         String director = request.getParameter("movie_director");
         String image = request.getParameter("movie_image");
         String category = request.getParameter("movie_category");
         String description = request.getParameter("product_description");
         Movie movie = new Movie(id, name, age, director, image, category, description);
         movieDAO.create(movie);
-//        RequestDispatcher dispatcher = request.getRequestDispatcher("Admin/create.jsp");
-//        dispatcher.forward(request, response);
         findAll(request, response);
     }
+
     private void deleteMovie(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         movieDAO.delete(id);
         findAll(request, response);
     }
 
-    private void findByNameMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String valueSearch = request.getParameter("searchbyname");
-        List<Movie> movies = null;
-        try {
-            movies = movieDAO.findByNameMovie(valueSearch);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        request.setAttribute("movies", movies);
-        request.getRequestDispatcher("movie/listmovie").forward(request, response);
-
+    private void updateMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, SQLException, IOException, ClassNotFoundException {
+        int key = Integer.parseInt(request.getParameter("id"));
+        Movie movie = movieDAO.findById(key);
+        movie.setNameMovie(request.getParameter("movie_name"));
+        movie.setTime(Integer.parseInt(request.getParameter("movie_time")));
+        movie.setDirector(request.getParameter("movie_director"));
+        movie.setDescription(request.getParameter("movie_description"));
+        movie.setCategory(request.getParameter("movie_category"));
+        movie.setImage(request.getParameter("movie_image"));
+        movieDAO.update(movie);
+        findAll(request, response);
     }
-
 }
