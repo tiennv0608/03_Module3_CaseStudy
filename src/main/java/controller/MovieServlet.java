@@ -110,4 +110,10 @@ public class MovieServlet extends HttpServlet {
         findAll(request, response);
     }
 
+    private void sortByTime(HttpServletRequest request, HttpServletResponse response){
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("Admin/listMovie.jsp");
+
+
+    }
+
 }

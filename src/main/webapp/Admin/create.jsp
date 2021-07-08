@@ -41,7 +41,6 @@
 
             <td><input type="file" name="image" class="form-control-file" id="exampleFormControlFile1"></td>
 
-    <
             </tr>
             <tr>
                 <td>add category</td>
