@@ -50,7 +50,22 @@ public class LoginServlet extends HttpServlet {
             case "signup":
                 signup(request, response);
                 break;
+            case "edit":
+                try {
+                    updateUser(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
         }
+    }
+
+    private void showHomePageUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        String username = request.getParameter("username");
+        User user = userDAO.findByUsername(username);
+        request.setAttribute("user", user);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/listmovie.jsp");
+        dispatcher.forward(request, response);
     }
 
     protected void login(HttpServletRequest request, HttpServletResponse response) throws
@@ -103,4 +118,16 @@ public class LoginServlet extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
+    private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        String username = request.getParameter("username");
+        User user = userDAO.findByUsername(username);
+        user.setFullName(request.getParameter("fullname"));
+        user.setGender(request.getParameter("gender"));
+        user.setDob(Integer.parseInt(request.getParameter("year")));
+        user.setPhone(request.getParameter("phone"));
+        user.setEmail(request.getParameter("email"));
+        user.setAddress(request.getParameter("address"));
+        userDAO.update(user);
+        showHomePageUser(request, response);
+    }
 }
