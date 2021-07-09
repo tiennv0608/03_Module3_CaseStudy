@@ -79,6 +79,12 @@
     </nav>
     <h1><a href="/movies">List Movie</a></h1>
     <h2 align="center"><a href=${pageContext.request.contextPath}/movies?action=create>Add new movie</a></h2>
+    <form method="get" class="form-inline my-2 my-lg-0 d-flex">
+        <input type="hidden" name="action" value="searchname">
+        <input class="form-control mr-sm-2" type="text" name="key">
+        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search">
+    </form>
+
     <table class="table table-striped">
         <thead>
         <tr>

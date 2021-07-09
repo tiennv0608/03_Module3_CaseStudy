@@ -9,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -71,8 +72,6 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         User user = userDAO.findByUsername(username);
         request.setAttribute("user", user);
-        List<Movie> movies = movieDAO.findAll();
-        request.setAttribute("movies", movies);
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/listmovie.jsp");
         dispatcher.forward(request, response);
     }
@@ -110,6 +109,7 @@ public class LoginServlet extends HttpServlet {
 
     protected void signup(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
+        PrintWriter out = response.getWriter();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String repassword = request.getParameter("repassword");
@@ -130,8 +130,12 @@ public class LoginServlet extends HttpServlet {
             } else {
                 User user = new User(username, password, gender, fullname, Integer.parseInt(year), email, phone, address);
                 userDAO.create(user);
-                request.setAttribute("message", "Dang ky thanh cong");
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
+//                request.setAttribute("alert", "Dang ky thanh cong");
+//                request.getRequestDispatcher("/login.jsp").forward(request, response);
+                out.println("<script type=\"text/javascript\">");
+                out.println("alert('Dang ky thanh cong');");
+                out.println("location='login.jsp';");
+                out.println("</script>");
             }
         }
     }

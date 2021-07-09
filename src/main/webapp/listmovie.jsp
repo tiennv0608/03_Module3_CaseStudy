@@ -93,16 +93,41 @@
     </div>
 </center>
 <div class="container">
+
+
+
+
+
+
     <div class="row">
+
+
+
+
+
+
         <c:forEach items="${movies}" var="movie">
             <div class="col-md-4">
-                <center>
-                    <a href="#" class="thumbnail">
-                        <img src="${movie.image}"
-                             class="d-block w-80" alt="${movie.nameMovie}" style="height: 300px">
-                        <p style="text-align:center">${movie.nameMovie}</p>
-                    </a>
-                </center>
+
+                <div class="card" style="width: 18rem;">
+                    <img src="${movie.image}" class="card-img-top" alt="${movie.nameMovie}">
+                    <div class="card-body">
+                        <h5 class="card-title">${movie.nameMovie}</h5>
+                        <p class="card-text">${movie.description}</p>
+                        <a href="#" class="btn btn-primary">Dat ve</a>
+                    </div>
+                </div>
+
+
+
+
+<%--                <center>--%>
+<%--                    <a href="#" class="thumbnail">--%>
+<%--                        <img src="${movie.image}"--%>
+<%--                             class="d-block w-80" alt="${movie.nameMovie}" style="height: 300px">--%>
+<%--                        <p style="text-align:center">${movie.nameMovie}</p>--%>
+<%--                    </a>--%>
+<%--                </center>--%>
             </div>
         </c:forEach>
     </div>
