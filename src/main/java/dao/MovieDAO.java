@@ -66,7 +66,14 @@ public class MovieDAO implements IDAO<Movie> {
     }
 
     @Override
-    public Movie findById(int id) {
+    public Movie findById(int id)  {
+        Connection connection = sqlConnection.getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 

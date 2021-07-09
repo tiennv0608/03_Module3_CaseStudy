@@ -14,6 +14,8 @@
 <body>
 <center>
     <h1>Member Information</h1>
+    <h1>XLXX.COM</h1>
+    <h1>PHIMJAVUYTIN</h1>
     <c:if test="${user != null}">
         <input type="hidden" name="password" value="<c:out value='${user.password}'/>"/>
     </c:if>
