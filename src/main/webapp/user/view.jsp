@@ -103,7 +103,7 @@
             <%--                This is an <strong>.alert</strong>. Use this to show important messages to the user.--%>
             <%--            </div>--%>
             <h3>Movie info</h3>
-            <form class="form-horizontal" role="form" method="post">
+            <form class="form-horizontal" role="form" method="post" action="/home">
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Full name:</label>
                     <div class="col-lg-8">
@@ -146,8 +146,9 @@
                 </div>
                 <div class="form-group">
                     <div class="col-lg-3">
+                        <input type="hidden" name="action" value="edit">
                         <input type="hidden" name="username" value="${user.username}">
-                        <input name="action" class="button-bar" type="submit" value="Update">
+                        <input nclass="button-bar" type="submit" value="Update">
                         <a href="/home?action=delete&key=${user.username}" class="button-bar">delete</a>
                     </div>
                 </div>

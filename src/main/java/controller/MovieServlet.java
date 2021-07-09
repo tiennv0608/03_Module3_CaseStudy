@@ -22,9 +22,6 @@ public class MovieServlet extends HttpServlet {
         }
         try {
             switch (action) {
-                case "searchname":
-                    findByName(request, response);
-                    break;
                 case "create":
                     showCreateMovie(request, response);
                     break;
@@ -69,6 +66,9 @@ public class MovieServlet extends HttpServlet {
                 case "edit":
                     updateMovie(request, response);
                     break;
+                case "searchname":
+                    findByName(request, response);
+                    break;
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -83,16 +83,10 @@ public class MovieServlet extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
-    public void findByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void findByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         String key = request.getParameter("key");
-        try {
-            List<Movie> movies = movieDAO.findByName(key);
-            request.setAttribute("movies", movies);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        List<Movie> movies = movieDAO.findByName(key);
+        request.setAttribute("movies", movies);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("Admin/listMovie.jsp");
         requestDispatcher.forward(request, response);
     }

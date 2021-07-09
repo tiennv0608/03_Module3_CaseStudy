@@ -119,7 +119,6 @@ To change this template use File | Settings | File Templates.
                 <option value="Lich su">Lịch sử</option>
                 <option value="Tai lieu">Tài liệu</option>
                 <option value="Hoat hinh">Hoạt hình</option>
-
             </select>
         </div>
     </div>

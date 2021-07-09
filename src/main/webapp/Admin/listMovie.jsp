@@ -65,31 +65,20 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Thành viên</a>
+                        <a class="nav-link active" aria-current="page" href="#">${user.username}</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-6">
-                                <a class="nav-link active" aria-current="page" href="/movies">Đăng xuất</a>
-                            </div>
-                        </div>
-                    </div>
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex" method="post" action="/movies">
+                    <a href="/home"><b>Đăng xuất</b></a>
+                    <input type="hidden" name="action" value="searchname">
+                    <input class="form-control me-2" type="search" placeholder="Search" name="key" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
         </div>
     </nav>
     <h1><a href="/movies">List Movie</a></h1>
-    <h2 align="center"><a href=${pageContext.request.contextPath}/movies?action=create>add new movie</a></h2>
-    <form method="get" class="form-inline my-2 my-lg-0 d-flex">
-        <input type="hidden" name="action" value="searchname">
-        <input class="form-control mr-sm-2" type="text" name="key">
-        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search">
-    </form>
-
+    <h2 align="center"><a href=${pageContext.request.contextPath}/movies?action=create>Add new movie</a></h2>
     <table class="table table-striped">
         <thead>
         <tr>

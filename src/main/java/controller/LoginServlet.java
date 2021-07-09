@@ -28,11 +28,7 @@ public class LoginServlet extends HttpServlet {
         try {
             switch (action) {
                 case "view":
-                    try {
-                        showFormView(request, response);
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
+                    showFormView(request, response);
                     break;
                 case "delete":
                     showFormDelete(request, response);
@@ -75,6 +71,8 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         User user = userDAO.findByUsername(username);
         request.setAttribute("user", user);
+        List<Movie> movies = movieDAO.findAll();
+        request.setAttribute("movies", movies);
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/listmovie.jsp");
         dispatcher.forward(request, response);
     }
@@ -85,18 +83,19 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         UserDAO userDAO = new UserDAO();
         User user = userDAO.login(username, password);
+        List<Movie> movies = movieDAO.findAll();
         if (user == null) {
             request.setAttribute("message", "Wrong user or password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             if (user.getUsername().equals("admin")) {
-                request.setAttribute("user", user);
-                request.getRequestDispatcher("Admin/listMovie.jsp").forward(request, response);
+                request.getSession().setAttribute("user", user);
+                request.getSession().setAttribute("movies", movies);
+                response.sendRedirect("Admin/listMovie.jsp");
             } else {
-                request.setAttribute("user", user);
-                List<Movie> movies = movieDAO.findAll();
-                request.setAttribute("movies", movies);
-                request.getRequestDispatcher("user/listmovie.jsp").forward(request, response);
+                request.getSession().setAttribute("user", user);
+                request.getSession().setAttribute("movies", movies);
+                response.sendRedirect("user/listmovie.jsp");
             }
         }
     }
