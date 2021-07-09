@@ -16,7 +16,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/movies">Trang chủ</a>
+        <a class="navbar-brand" href="/home">Trang chủ</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -93,16 +93,41 @@
     </div>
 </center>
 <div class="container">
+
+
+
+
+
+
     <div class="row">
+
+
+
+
+
+
         <c:forEach items="${movies}" var="movie">
             <div class="col-md-4">
-                <center>
-                    <a href="#" class="thumbnail">
-                        <img src="${movie.image}"
-                             class="d-block w-80" alt="${movie.nameMovie}" style="height: 300px">
-                        <p style="text-align:center">${movie.nameMovie}</p>
-                    </a>
-                </center>
+
+                <div class="card" style="width: 18rem;">
+                    <img src="${movie.image}" class="card-img-top" alt="${movie.nameMovie}">
+                    <div class="card-body">
+                        <h5 class="card-title">${movie.nameMovie}</h5>
+                        <p class="card-text">${movie.description}</p>
+                        <a href="#" class="btn btn-primary">Dat ve</a>
+                    </div>
+                </div>
+
+
+
+
+<%--                <center>--%>
+<%--                    <a href="#" class="thumbnail">--%>
+<%--                        <img src="${movie.image}"--%>
+<%--                             class="d-block w-80" alt="${movie.nameMovie}" style="height: 300px">--%>
+<%--                        <p style="text-align:center">${movie.nameMovie}</p>--%>
+<%--                    </a>--%>
+<%--                </center>--%>
             </div>
         </c:forEach>
     </div>

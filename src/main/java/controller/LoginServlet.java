@@ -133,7 +133,7 @@ public class LoginServlet extends HttpServlet {
             } else {
                 User user = new User(username, password, gender, fullname, Integer.parseInt(year), email, phone, address);
                 userDAO.create(user);
-//                request.setAttribute("alert", "alert('Dang ky thanh cong');");
+//                request.setAttribute("alert", "Dang ky thanh cong");
 //                request.getRequestDispatcher("/login.jsp").forward(request, response);
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('Dang ky thanh cong');");
