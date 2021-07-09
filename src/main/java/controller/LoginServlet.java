@@ -9,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -90,13 +91,13 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             if (user.getUsername().equals("admin")) {
-                request.setAttribute("user", user);
-                request.getRequestDispatcher("Admin/listMovie.jsp").forward(request, response);
+                request.getSession().setAttribute("user",user);
+                response.sendRedirect("Admin/listMovie.jsp");
             } else {
-                request.setAttribute("user", user);
+                request.getSession().setAttribute("user",user);
                 List<Movie> movies = movieDAO.findAll();
-                request.setAttribute("movies", movies);
-                request.getRequestDispatcher("user/listmovie.jsp").forward(request, response);
+                request.getSession().setAttribute("movies",movies);
+                response.sendRedirect("user/listmovie.jsp");
             }
         }
     }
@@ -111,6 +112,7 @@ public class LoginServlet extends HttpServlet {
 
     protected void signup(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
+        PrintWriter out = response.getWriter();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String repassword = request.getParameter("repassword");
@@ -131,8 +133,12 @@ public class LoginServlet extends HttpServlet {
             } else {
                 User user = new User(username, password, gender, fullname, Integer.parseInt(year), email, phone, address);
                 userDAO.create(user);
-                request.setAttribute("message", "Dang ky thanh cong");
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
+//                request.setAttribute("alert", "alert('Dang ky thanh cong');");
+//                request.getRequestDispatcher("/login.jsp").forward(request, response);
+                out.println("<script type=\"text/javascript\">");
+                out.println("alert('Dang ky thanh cong');");
+                out.println("location='login.jsp';");
+                out.println("</script>");
             }
         }
     }
