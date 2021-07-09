@@ -83,7 +83,6 @@ public class MovieDAO implements IDAO<Movie> {
     @Override
     public Movie findById(int id) {
         Connection connection = sqlConnection.getConnection();
-        ;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID);
             preparedStatement.setInt(1, id);

@@ -63,7 +63,8 @@
                             ${user.username}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/home?action=view&key=${user.username}">My Information</a></li>
+                            <li><a class="dropdown-item" href="/home?action=view&key=${user.username}">My
+                                Information</a></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
@@ -106,33 +107,17 @@
 </center>
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <center>
-                <a href="#" class="thumbnail">
-                    <img src="https://i.pinimg.com/originals/12/4f/87/124f87aef279a48e55b95a5ce9fadaa1.jpg"
-                         class="d-block w-80" alt="Titanic" style="height: 300px">
-                    <p style="text-align:center">Titanic</p> <a href="">Đặt vé</a>
-                </a>
-            </center>
-        </div>
-        <div class="col-md-4">
-            <center>
-                <a href="#" class="thumbnail">
-                    <img src="https://koicine.com/wp-content/uploads/2021/01/125528764_2916400158594025_2129206050230143939_o-819x1024.jpg"
-                         class="d-block w-80" alt="Tom and Jerry" style="height: 300px">
-                    <p style="text-align:center">Tom and Jerry</p> <a href="">Đặt vé</a>
-                </a>
-            </center>
-        </div>
-        <div class="col-md-4">
-            <center>
-                <a href="#" class="thumbnail">
-                    <img src="https://play-lh.googleusercontent.com/XDg-bt655am_Q-7X-I0s64Kq8SJKfb7BBTHkUVbFR6-zDNv9J7rW61xZn0BB3SVCJ6gz"
-                         class="d-block w-80" alt="Avengers" style="height: 300px">
-                    <p style="text-align:center">Avengers</p> <a href="">Đặt vé</a>
-                </a>
-            </center>
-        </div>
+        <c:forEach items="${movies}" var="movie">
+            <div class="col-md-4">
+                <center>
+                    <a href="#" class="thumbnail">
+                        <img src="${movie.image}"
+                             class="d-block w-80" alt="${movie.nameMovie}" style="height: 300px">
+                        <p style="text-align:center">${movie.nameMovie}</p>
+                    </a>
+                </center>
+            </div>
+        </c:forEach>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

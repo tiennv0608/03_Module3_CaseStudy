@@ -77,6 +77,7 @@ public class MovieServlet extends HttpServlet {
 
     public void findAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("Admin/listMovie.jsp");
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("listmovie.jsp");
         List<Movie> movies = movieDAO.findAll();
         request.setAttribute("movies", movies);
         requestDispatcher.forward(request, response);
