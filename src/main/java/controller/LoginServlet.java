@@ -1,6 +1,8 @@
 package controller;
 
+import dao.MovieDAO;
 import dao.UserDAO;
+import model.Movie;
 import model.User;
 
 import javax.servlet.*;
@@ -8,10 +10,12 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/home")
 public class LoginServlet extends HttpServlet {
     private UserDAO userDAO = new UserDAO();
+    private MovieDAO movieDAO = new MovieDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,19 +25,23 @@ public class LoginServlet extends HttpServlet {
         if (action == null) {
             action = "";
         }
-        switch (action) {
-            case "view":
-                try {
-                    showFormView(request, response);
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-                break;
-            case "signup":
-                signup(request, response);
-                break;
-            default:
-                request.getRequestDispatcher("listmovie.jsp").forward(request, response);
+        try {
+            switch (action) {
+                case "view":
+                    try {
+                        showFormView(request, response);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                    break;
+                case "delete":
+                    showFormDelete(request, response);
+                    break;
+                default:
+                    findAll(request, response);
+            }
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
         }
     }
 
@@ -43,18 +51,36 @@ public class LoginServlet extends HttpServlet {
         if (action == null) {
             action = "";
         }
-        switch (action) {
-            case "login":
-                login(request, response);
-                break;
-            case "signup":
-                signup(request, response);
-                break;
+        try {
+            switch (action) {
+                case "login":
+                    login(request, response);
+                    break;
+                case "signup":
+                    signup(request, response);
+                    break;
+                case "edit":
+                    updateUser(request, response);
+                    break;
+                case "delete":
+                    deleteUser(request, response);
+                    break;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 
+    private void showHomePageUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        String username = request.getParameter("username");
+        User user = userDAO.findByUsername(username);
+        request.setAttribute("user", user);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/listmovie.jsp");
+        dispatcher.forward(request, response);
+    }
+
     protected void login(HttpServletRequest request, HttpServletResponse response) throws
-            ServletException, IOException {
+            ServletException, IOException, SQLException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         UserDAO userDAO = new UserDAO();
@@ -63,13 +89,24 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("message", "Wrong user or password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            if(user.getUsername().equals("admin")){
-                response.sendRedirect("/movies");
+            if (user.getUsername().equals("admin")) {
+                request.setAttribute("user", user);
+                request.getRequestDispatcher("Admin/listMovie.jsp").forward(request, response);
             } else {
                 request.setAttribute("user", user);
+                List<Movie> movies = movieDAO.findAll();
+                request.setAttribute("movies", movies);
                 request.getRequestDispatcher("user/listmovie.jsp").forward(request, response);
             }
         }
+    }
+
+    public void findAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("Admin/listMovie.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("listmovie.jsp");
+        List<Movie> movies = movieDAO.findAll();
+        request.setAttribute("movies", movies);
+        requestDispatcher.forward(request, response);
     }
 
     protected void signup(HttpServletRequest request, HttpServletResponse response) throws
@@ -108,4 +145,34 @@ public class LoginServlet extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
+    private void showFormDelete(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/delete.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        String username = request.getParameter("username");
+        User user = userDAO.findByUsername(username);
+        user.setFullName(request.getParameter("fullname"));
+        user.setGender(request.getParameter("gender"));
+        user.setDob(Integer.parseInt(request.getParameter("year")));
+        user.setPhone(request.getParameter("phone"));
+        user.setEmail(request.getParameter("email"));
+        user.setAddress(request.getParameter("address"));
+        userDAO.update(user);
+        showHomePageUser(request, response);
+    }
+
+    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        String key = request.getParameter("key");
+        userDAO.deleteByUsername(key);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("listmovie.jsp");
+        dispatcher.forward(request, response);
+    }
 }
