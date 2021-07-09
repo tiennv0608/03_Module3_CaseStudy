@@ -12,6 +12,8 @@ public class UserDAO implements IDAO<User> {
     private static final String LOG_IN = "select * from  user where username = ? and password = ?";
     private static final String SIGNUP = "insert into user values(?,?,?,?,?,?,?,?);";
     private static final String CHECK_EXIST_USER = "select * from user where username = ?";
+    private static final String UPDATE = "update user set fullname = ?, gender = ?, yearofbirth = ?, email = ?, phone = ?, address = ? where username = ?;";
+    private static final String DELETE = "delete from user where username = ?";
 
     SQLConnection sqlConnection = new SQLConnection();
 
@@ -40,20 +42,20 @@ public class UserDAO implements IDAO<User> {
 
     @Override
     public void update(User user) {
-//        Connection connection = sqlConnection.getConnection();
-//        try {
-//            PreparedStatement preparedStatement = connection.prepareStatement(SIGNUP);
-//            preparedStatement.setString(1, user.getUsername());
-//            preparedStatement.setString(2, user.getPassword());
-//            preparedStatement.setString(3, user.getGender());
-//            preparedStatement.setString(4, user.getFullName());
-//            preparedStatement.setInt(5, user.getDob());
-//            preparedStatement.setString(6, user.getEmail());
-//            preparedStatement.setString(7, user.getPhone());
-//            preparedStatement.setString(8, user.getAddress());
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        Connection connection = sqlConnection.getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
+            preparedStatement.setString(1, user.getFullName());
+            preparedStatement.setString(2, user.getGender());
+            preparedStatement.setInt(3, user.getDob());
+            preparedStatement.setString(4, user.getEmail());
+            preparedStatement.setString(5, user.getPhone());
+            preparedStatement.setString(6, user.getAddress());
+            preparedStatement.setString(7, user.getUsername());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean checkUserExist(String username) {
@@ -123,5 +125,12 @@ public class UserDAO implements IDAO<User> {
             }
         }
         return null;
+    }
+
+    public void deleteByUsername(String username) throws SQLException {
+        Connection connection = sqlConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
+        preparedStatement.setString(1, username);
+        preparedStatement.executeUpdate();
     }
 }

@@ -111,7 +111,7 @@
                 <a href="#" class="thumbnail">
                     <img src="https://i.pinimg.com/originals/12/4f/87/124f87aef279a48e55b95a5ce9fadaa1.jpg"
                          class="d-block w-80" alt="Titanic" style="height: 300px">
-                    <p style="text-align:center">Titanic</p>
+                    <p style="text-align:center">Titanic</p> <a href="">Đặt vé</a>
                 </a>
             </center>
         </div>
@@ -122,6 +122,7 @@
                          class="d-block w-80" alt="Tom and Jerry" style="height: 300px">
                     <p style="text-align:center">Tom and Jerry</p>
                     <button type="button" class="btn btn-info"><a href=/movies?action=bookTicket>đặt vé</a></button>
+                    <p style="text-align:center">Tom and Jerry</p> <a href="">Đặt vé</a>
                 </a>
             </center>
         </div>
@@ -130,7 +131,7 @@
                 <a href="#" class="thumbnail">
                     <img src="https://play-lh.googleusercontent.com/XDg-bt655am_Q-7X-I0s64Kq8SJKfb7BBTHkUVbFR6-zDNv9J7rW61xZn0BB3SVCJ6gz"
                          class="d-block w-80" alt="Avengers" style="height: 300px">
-                    <p style="text-align:center">Avengers</p>
+                    <p style="text-align:center">Avengers</p> <a href="">Đặt vé</a>
                 </a>
             </center>
         </div>

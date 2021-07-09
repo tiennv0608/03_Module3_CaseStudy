@@ -17,11 +17,11 @@
     <c:if test="${user != null}">
         <input type="hidden" name="password" value="<c:out value='${user.password}'/>"/>
     </c:if>
-    <form action="">
+    <form method="post" action="/home">
         <table border="1">
             <tr>
                 <td>Username:</td>
-                <td><input type="text" name="username" value="${user.username}"></td>
+                <td>${user.username}</td>
             </tr>
             <tr>
                 <td>Fullname:</td>
@@ -49,6 +49,16 @@
             <tr>
                 <td>Address:</td>
                 <td><input type="text" name="address" value="${user.address}"></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="hidden" name="username" value="${user.username}">
+                    <input type="hidden" name="action" value="edit">
+                    <button>Edit</button>`
+                </td>
+                <td>
+                    <a href="/home?action=delete&key=${user.username}">delete</a>
+                </td>
             </tr>
         </table>
     </form>
