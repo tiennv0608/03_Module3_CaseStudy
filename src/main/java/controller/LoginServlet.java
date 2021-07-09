@@ -31,6 +31,12 @@ public class LoginServlet extends HttpServlet {
                 case "view":
                     showFormView(request, response);
                     break;
+                case "viewmovie":
+                    showFormMovieView(request, response);
+                    break;
+                case "viewfilm":
+                    showFormMovie(request, response);
+                    break;
                 case "delete":
                     showFormDelete(request, response);
                     break;
@@ -62,8 +68,11 @@ public class LoginServlet extends HttpServlet {
                 case "delete":
                     deleteUser(request, response);
                     break;
+                case "searchname":
+                    findByName(request, response);
+                    break;
             }
-        } catch (SQLException throwables) {
+        } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
     }
@@ -140,11 +149,37 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
+    public void findByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
+        String key = request.getParameter("key");
+        List<Movie> movies = movieDAO.findByName(key);
+        request.setAttribute("movies", movies);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("listmovie.jsp");
+        requestDispatcher.forward(request, response);
+    }
+
     private void showFormView(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         String key = request.getParameter("key");
         User user = userDAO.findByUsername(key);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/view.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/userview.jsp");
         request.setAttribute("user", user);
+        requestDispatcher.forward(request, response);
+    }
+
+    private void showFormMovie(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        int key = Integer.parseInt(request.getParameter("id"));
+        Movie movie = movieDAO.findById(key);
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/view.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("movie/MovieDetail.jsp");
+        request.setAttribute("movie", movie);
+        requestDispatcher.forward(request, response);
+    }
+
+    private void showFormMovieView(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        int key = Integer.parseInt(request.getParameter("id"));
+        Movie movie = movieDAO.findById(key);
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/view.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("movie/MovieDetail.jsp");
+        request.setAttribute("movie", movie);
         requestDispatcher.forward(request, response);
     }
 

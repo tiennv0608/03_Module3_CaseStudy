@@ -1,21 +1,23 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Admin-Thính
-  Date: 7/7/2021
-  Time: 11:27 AM
+  User: Admin
+  Date: 7/9/2021
+  Time: 11:22 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>List Movie</title>
+    <title>Title</title>
+    <link rel="stylesheet" href="../user/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+          integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
+    <div class="container">
         <a class="navbar-brand" href="/user/listmovie.jsp">Trang chủ</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,16 +26,32 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown1" role="button"
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
                         Phim đang chiếu
                     </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown2" role="button"
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
                         Phim sắp chiếu
                     </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Thành viên</a>
@@ -60,55 +78,31 @@
         </div>
     </div>
 </nav>
-<center>
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"
-         style="width: 300px; height: 450px">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://koicine.com/wp-content/uploads/2021/01/125528764_2916400158594025_2129206050230143939_o-819x1024.jpg"
-                     class="d-block w-100" alt="Tom and Jerry">
-            </div>
-            <div class="carousel-item">
-                <img src="https://i.pinimg.com/originals/12/4f/87/124f87aef279a48e55b95a5ce9fadaa1.jpg"
-                     class="d-block w-100" alt="Titanic">
-            </div>
-            <div class="carousel-item">
-                <img src="https://play-lh.googleusercontent.com/XDg-bt655am_Q-7X-I0s64Kq8SJKfb7BBTHkUVbFR6-zDNv9J7rW61xZn0BB3SVCJ6gz"
-                     class="d-block w-100" alt="Avengers">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <center>
+                <div class="project-info-box mt-0">
+                    <h5>${movie.nameMovie}</h5>
+                    <p class="mb-0">${movie.description}</p>
+                </div><!-- / project-info-box -->
+                <hr>
+                <div class="project-info-box">
+                    <p><b>Time: </b> ${movie.time}</p>
+                    <p><b>Director: </b>${movie.director}</p>
+                    <p><b>Category: </b>${movie.category}</p>
+                </div><!-- / project-info-box -->
+            </center>
+        </div><!-- / column -->
+
+        <div class="col-md-7">
+            <img src="${movie.image}" alt="project-image" class="rounded" style="width: 500px; height: 800px">
+        </div><!-- / column -->
     </div>
-</center>
-<center>
-    <div class="container">
-        <div class="row">
-            <c:forEach items="${movies}" var="movie">
-                <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="${movie.image}" class="card-img-top" style="height: 400px" alt="${movie.nameMovie}">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="/home?action=viewfilm&id=${movie.id}">${movie.nameMovie}</a></h5>
-                            <p class="card-text">${movie.category}</p>
-                            <a href="#" class="btn btn-primary">Dat ve</a>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
-    </div>
-</center>
+</div>
+</body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-</body>
 </html>

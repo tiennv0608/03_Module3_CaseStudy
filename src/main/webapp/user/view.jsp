@@ -1,84 +1,10 @@
-<%--&lt;%&ndash;--%>
-<%--  Created by IntelliJ IDEA.--%>
-<%--  User: Nguyen Viet Tien--%>
-<%--  Date: 07/07/2021--%>
-<%--  Time: 10:54 PM--%>
-<%--  To change this template use File | Settings | File Templates.--%>
-<%--&ndash;%&gt;--%>
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%--<html>--%>
-<%--<head>--%>
-<%--    <title>Title</title>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<center>--%>
-<%--    <h1>Member Information</h1>--%>
-<%--    <c:if test="${user != null}">--%>
-<%--        <input type="hidden" name="password" value="<c:out value='${user.password}'/>"/>--%>
-<%--    </c:if>--%>
-<%--    <form method="post" action="/home">--%>
-<%--        <table border="1">--%>
-<%--            <tr>--%>
-<%--                <td>Username:</td>--%>
-<%--                <td>${user.username}</td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>Fullname:</td>--%>
-<%--                <td><input type="text" name="fullname" value="${user.fullName}"></td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>Gender</td>--%>
-<%--                <td><select name="gender" id="">--%>
-<%--                    <option value="Nam">Nam</option>--%>
-<%--                    <option value="Nu">Nu</option>--%>
-<%--                </select></td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>Year of birth:</td>--%>
-<%--                <td><input type="text" name="year" value="${user.dob}"></td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>Phone:</td>--%>
-<%--                <td><input type="text" name="phone" value="${user.phone}"></td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>Email:</td>--%>
-<%--                <td><input type="text" name="email" value="${user.email}"></td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>Address:</td>--%>
-<%--                <td><input type="text" name="address" value="${user.address}"></td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>--%>
-<%--                    <input type="hidden" name="username" value="${user.username}">--%>
-<%--                    <input type="hidden" name="action" value="edit">--%>
-<%--                    <button>Edit</button>`--%>
-<%--                </td>--%>
-<%--                <td>--%>
-<%--                    <a href="/home?action=delete&key=${user.username}">delete</a>--%>
-<%--                </td>--%>
-<%--            </tr>--%>
-<%--        </table>--%>
-<%--    </form>--%>
-<%--</center>--%>
-<%--</body>--%>
-<%--</html>--%>
-<%--
-  Created by IntelliJ IDEA.
-  User: Nguyen Viet Tien
-  Date: 07/08/2021
-  Time: 10:53 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -90,67 +16,97 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/user/listmovie.jsp">Trang chủ</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" id="navbarDropdown1" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Phim đang chiếu
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" id="navbarDropdown2" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Phim sắp chiếu
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Thành viên</a>
+                </li>
+            </ul>
+            <form class="d-flex" action="/home" method="post">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <b>${user.username}</b>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/home?action=view&key=${user.username}">My
+                                Information</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <a href="/home" class="nav-link"><b>Logout</b></a>
+                <input type="hidden" name="action" value="searchname">
+                <input class="form-control me-2" name="key" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
 <div class="container bootstrap snippets bootdey">
     <h1 class="text-primary"><span class="glyphicon glyphicon-user"></span>Edit Movie</h1>
     <hr>
     <div class="row">
         <div class="col-md-3">
+            <img src="${movie.image}" alt="${movie.nameMovie}" style="height: 500px; width: 280px">
         </div>
         <div class="col-md-9 personal-info">
-            <%--            <div class="alert alert-info alert-dismissable">--%>
-            <%--                <a class="panel-close close" data-dismiss="alert">×</a>--%>
-            <%--                <i class="fa fa-coffee"></i>--%>
-            <%--                This is an <strong>.alert</strong>. Use this to show important messages to the user.--%>
-            <%--            </div>--%>
             <h3>Movie info</h3>
             <form class="form-horizontal" role="form" method="post" action="/home">
                 <div class="form-group">
-                    <label class="col-lg-3 control-label">Full name:</label>
+                    <label class="col-lg-3 control-label">Movie name:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="text" name="fullname"
-                               value="${user.fullName}">
+                        <input class="form-control" type="text" name="movie_name"
+                               value="${movie.nameMovie}">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-lg-3 control-label">Year of birth:</label>
+                    <label class="col-lg-3 control-label">Time:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="text" name="year" value="${user.dob}">
+                        <input class="form-control" type="text" name="movie_time" value="${movie.time}">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-lg-3 control-label">Phone:</label>
+                    <label class="col-lg-3 control-label">Director:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="text" name="phone" value="${user.phone}">
+                        <input class="form-control" type="text" name="movie_director" value="${movie.director}">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-lg-3 control-label">Email:</label>
+                    <label class="col-lg-3 control-label">Category: </label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="text" name="email" value="${user.email}">
+                        <input class="form-control" type="text" name="category" value="${movie.category}">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-lg-3 control-label">Address:</label>
+                    <label class="col-lg-3 control-label">Description: </label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="text" name="address" value="${user.address}">
+                        <textarea class="form-control" type="text" name="description"
+                                  value="${movie.description}"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-lg-3 control-label" for="movie_category">Gender</label>
-                    <div class="col-lg-8">
-                        <select id="movie_category" name="gender" class="form-control">
-                            <option value="Nam">Nam</option>
-                            <option value="Nu">Nu</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-3">
-                        <input type="hidden" name="action" value="edit">
-                        <input type="hidden" name="username" value="${user.username}">
-                        <input nclass="button-bar" type="submit" value="Update">
-                        <a href="/home?action=delete&key=${user.username}" class="button-bar">delete</a>
-                    </div>
+                    <a href="/home" class="btn btn-primary">Back</a>
                 </div>
             </form>
         </div>
